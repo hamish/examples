@@ -1,0 +1,14 @@
+<html>
+	<head>
+		<title>View</title>
+		
+	</head>
+	<body > 
+	<hr />
+	{% if thing.name %}value="{{thing.name}}"{% endif %}
+	 <hr />
+	{% if thing.description %}{{thing.description}}{% endif %}
+	<hr />
+		<a href="../?editor={{editor}}">Index</a>
+	</body>
+</html>

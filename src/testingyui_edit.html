@@ -1,0 +1,57 @@
+<html>
+	<head>
+		<title>Edit</title>
+		
+		{% ifequal editor "fck" %}
+		<script type="text/javascript" src="/static/fckeditor/fckeditor.js"></script>
+		<script type="text/javascript">
+			window.onload = function()
+			{
+				var oFCKeditor = new FCKeditor( 'description' ) ;
+				oFCKeditor.BasePath = "/static/fckeditor/" ;
+				oFCKeditor.ReplaceTextarea() ;
+			}
+		</script>
+		
+		{% endifequal %}
+		
+		{% ifequal editor "nic" %}
+		<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+		<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+		{% endifequal %}
+		
+		{% ifequal editor "yui" %}
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/assets/skins/sam/skin.css"> 
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>  
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/element/element-beta-min.js"></script>  
+		<script src="http://yui.yahooapis.com/2.6.0/build/container/container_core-min.js"></script> 
+		<script src="http://yui.yahooapis.com/2.6.0/build/menu/menu-min.js"></script> 
+		<script src="http://yui.yahooapis.com/2.6.0/build/button/button-min.js"></script> 
+		<script src="http://yui.yahooapis.com/2.6.0/build/editor/editor-min.js"></script>
+		 		 
+		<script type="text/javascript">
+			var myEditor = new YAHOO.widget.Editor('description', { 
+			    height: '300px', 
+			    width: '922px', 
+			    handleSubmit: true,
+			    dompath: true, //Turns on the bar at the bottom 
+			    animate: true //Animates the opening, closing and moving of Editor windows 
+			}); 
+			myEditor.render(); 
+		</script>		
+		{% endifequal %}
+	</head>
+	<body {% ifequal editor "yui" %}class="yui-skin-sam"{% endifequal %}> 
+		<form action="../save/" method="POST" >
+			Name: <input type="text" name="name" {% if thing.name %}value="{{thing.name}}"{% endif %} />
+			Description: 
+			<div id="html_entry"><textarea id="description" name="description" rows=10 cols=40>{% if thing.description %}{{thing.description}}{% endif %}</textarea></div>
+			
+			<br />
+			<input type="submit" name="Save" value="Save Changes" />
+			<input type="hidden" name="key"  value="{{thing.key}}" /> 
+			<input type="hidden" name="editor"  value="{{editor}}" /> 
+		 </form>
+		<a href="../?editor={{editor}}">Index</a>
+	</body>
+</html>

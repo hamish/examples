@@ -1,0 +1,21 @@
+<html>
+<head>
+<title>Testing YUI Editor</title>
+</head>
+<body>
+<strong>Current Editor</strong>: {{editor}} <strong>Select</strong>:
+<a href="?editor=simple">Simple Editor</a> | 
+<a href="?editor=fck">FCK Editor</a> | 
+<a href="?editor=yui">YUI Editor</a> | 
+<a href="?editor=nic">Nic Editor</a> 
+<br />
+<a href="edit/?editor={{editor}}">Create new Thing</a>
+<hr>
+	{% for thing in things %}
+		Name: {{thing.name}} 
+			<a href="edit/?key={{thing.key}}&editor={{editor}}">edit</a>
+			<a id="{{thing.name}}" href="view/?key={{thing.key}}&editor={{editor}}">view</a>
+			<br />
+	{% endfor %}
+</body>
+</html>

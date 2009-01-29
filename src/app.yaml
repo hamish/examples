@@ -1,0 +1,11 @@
+application: examples
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /testingyui/.*
+  script: testingyui.py
+
+- url: /static
+  static_dir: static
